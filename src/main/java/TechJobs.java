@@ -124,12 +124,12 @@ public class TechJobs {
             System.out.println("No Results");
         } else {
             for (int i = 0; i < someJobs.size(); i++) {
+                System.out.println("");
                 System.out.println("*****");
                 someJobs.get(i).forEach((key,value) -> {
                     System.out.println(key + ": " + value);
                 });
                 System.out.println("*****");
-                System.out.println("");
             }
         }
 

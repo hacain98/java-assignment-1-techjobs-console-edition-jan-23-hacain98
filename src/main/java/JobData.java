@@ -93,48 +93,54 @@ public class JobData {
      * @param value The search term to look for
      * @return      List of all jobs with at least one field containing the value
      */
-    public static ArrayList<HashMap<String, String>> findByValue(String value) {
+    public static ArrayList<HashMap<String, String>> findByValue(String jobs) {
 
         // load data, if not already loaded
         loadData();
 
-        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+        ArrayList<HashMap<String, String>> moreJobs = new ArrayList<>();
 
         for (HashMap<String, String> row : allJobs) {
-
-            value = value.toLowerCase();
-
-            if (row.get("position type").toLowerCase().contains(value) && !jobs.contains(row)) {
-                jobs.add(row);
-            }
-
-            if (row.get("name").toLowerCase().contains(value) && !jobs.contains(row)) {
-                jobs.add(row);
-            }
-
-            if (row.get("employer").toLowerCase().contains(value) && !jobs.contains(row)) {
-                jobs.add(row);
-            }
-
-            if (row.get("location").toLowerCase().contains(value) && !jobs.contains(row)) {
-                jobs.add(row);
-            }
-
-            if (row.get("core competency").toLowerCase().contains(value) && !jobs.contains(row)) {
-                jobs.add(row);
-            }
+            row.forEach((key, value) -> {
+                if (value.contains(jobs)) {
+                    moreJobs.add(row);
+                }
+            });
 
         }
-        System.out.println(jobs);
 
-        return jobs;
+//            value = value.toLowerCase();
+//
+//            if (row.get("position type").toLowerCase().contains(value) && !jobs.contains(row)) {
+//                jobs.add(row);
+//            }
+//
+//            if (row.get("name").toLowerCase().contains(value) && !jobs.contains(row)) {
+//                jobs.add(row);
+//            }
+//
+//            if (row.get("employer").toLowerCase().contains(value) && !jobs.contains(row)) {
+//                jobs.add(row);
+//            }
+//
+//            if (row.get("location").toLowerCase().contains(value) && !jobs.contains(row)) {
+//                jobs.add(row);
+//            }
+//
+//            if (row.get("core competency").toLowerCase().contains(value) && !jobs.contains(row)) {
+//                jobs.add(row);
+//            }
+//
+//        }
+//        System.out.println(jobs);
+
+        return moreJobs;
     }
 
     /**
      * Read in data from a CSV file and store it in a list
      */
     private static void loadData() {
-
         // Only load data once
         if (isDataLoaded) {
             return;
